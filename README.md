@@ -55,7 +55,13 @@ Use the fixtures by adding them into each test's arguments.
 
 Try using `autouse`.
 
-### 03-scopes
+### 03-sharing-fixtures
+
+Create a new file called `conftext.py`. Move the fixtures into that file.
+
+Run pytest.
+
+### 04-scopes
 
 Try setting different scopes on the fixtures. The default scope is `function`. Choose from
 
@@ -66,12 +72,6 @@ Try setting different scopes on the fixtures. The default scope is `function`. C
 * `session`
 
 What do you notice in the test output? (Be sure to run pytest with the `-s` flag)
-
-### 04-sharing-fixtures
-
-Create a new file called `conftext.py`. Move the fixtures into that file.
-
-Run pytest.
 
 ### 05-marks
 
