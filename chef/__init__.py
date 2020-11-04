@@ -1,42 +1,32 @@
-from collections import namedtuple
+from chef.dish import Dish
+from chef.exceptions import UnknownDish
+from chef.techniques import hash_ingredients
 
 
-Dish = namedtuple("Dish", ["name", "ingredients", "cooked", "type"])
+DISHES = [
+    Dish("soffritto", ["carrots", "celery", "onion"], False, "base"),
+    Dish("sponge cake", ["sugar", "flour", "eggs", "butter"], True, "dessert"),
+    Dish(
+        "rice noodles",
+        ["miso", "dashi stock", "seaweed", "tofu", "rice noodles"],
+        True,
+        "soup noodles",
+    ),
+    Dish(
+        "belt noodles",
+        ["miso", "dashi stock", "seaweed", "tofu", "belt noodles"],
+        True,
+        "soup noodles",
+    ),
+    Dish(
+        "knife cut noodles",
+        ["miso", "dashi stock", "seaweed", "tofu", "knife cut noodles"],
+        True,
+        "soup noodles",
+    ),
+]
 
-
-class UnknownDish(Exception):
-    pass
-
-
-def hash_ingredients(ingredients):
-    return "-".join(sorted(set(ingredients)))
-
-
-RECIPES = {
-    hash_ingredients(dish.ingredients): dish
-    for dish in [
-        Dish("soffritto", ["carrots", "celery", "onion"], False, "base"),
-        Dish("sponge cake", ["sugar", "flour", "eggs", "butter"], True, "dessert"),
-        Dish(
-            "rice noodles",
-            ["miso", "dashi stock", "seaweed", "tofu", "rice noodles"],
-            True,
-            "soup noodles",
-        ),
-        Dish(
-            "belt noodles",
-            ["miso", "dashi stock", "seaweed", "tofu", "belt noodles"],
-            True,
-            "soup noodles",
-        ),
-        Dish(
-            "knife cut noodles",
-            ["miso", "dashi stock", "seaweed", "tofu", "knife cut noodles"],
-            True,
-            "soup noodles",
-        ),
-    ]
-}
+RECIPES = {hash_ingredients(dish.ingredients): dish for dish in DISHES}
 
 
 def cook(ingredients):
@@ -45,4 +35,4 @@ def cook(ingredients):
     try:
         return RECIPES[key]
     except KeyError:
-        raise UnknownDish("No dish known for ingredients")
+        raise UnknownDish("No dish known with given ingredients")

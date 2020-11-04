@@ -1,0 +1,2 @@
+class UnknownDish(ValueError):
+    pass
