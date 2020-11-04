@@ -1,6 +1,23 @@
 import pytest
 
 from chef import cook
+from kitchen import utensils
+
+
+@pytest.fixture
+def pot():
+    pot = utensils.Pot()
+    pot.boil_water()
+
+    yield pot
+
+
+@pytest.fixture
+def bowl():
+    bowl = utensils.Bowl()
+    bowl.warm()
+
+    yield bowl
 
 
 def test_chef_can_cook_rice_noodles():
